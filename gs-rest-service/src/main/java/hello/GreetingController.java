@@ -1,8 +1,6 @@
 package hello;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -11,16 +9,21 @@ import java.util.concurrent.atomic.AtomicLong;
  * User: Svetlana Chapskaya
  * Date: 16.07.2016
  * Time: 17:44
- * To change this template use File | Settings | File Templates.
+ * To change this templateName use File | Settings | File Templates.
  */
 @RestController
 public class GreetingController {
-    private static final String template = "Hello, %s!";
+    private static final String templateName = "Hello, %s!";
+    private static final String templateSurname = "Hello, %s %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping("/greeting")
-    public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
+    @RequestMapping(value = "/greeting/{name}", method = RequestMethod.GET)
+    public Greeting greeting(@PathVariable(value="name") String name, @RequestParam(value = "surname", defaultValue = "") String surname) {
+        String content =
+                (!surname.isEmpty())
+                        ? String.format(templateSurname, name, surname)
+                        : String.format(templateName, name);
         return new Greeting(counter.incrementAndGet(),
-                String.format(template, name));
+                content);
     }
 }
