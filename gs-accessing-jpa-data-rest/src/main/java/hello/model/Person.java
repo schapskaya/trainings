@@ -15,6 +15,9 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    public Person() {
+    }
+
     private String firstName;
     private String lastName;
 
