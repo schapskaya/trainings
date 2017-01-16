@@ -1,11 +1,9 @@
 package com.task.rest;
 
-import com.task.core.ProductDao;
-import com.task.model.Product;
+import com.task.core.IProductDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +22,7 @@ public class PricesResource {
     private static final Logger log = LoggerFactory.getLogger(PricesResource.class);
 
     @Autowired
-    private ProductDao productDao;
+    private IProductDao productDao;
 
     @RequestMapping(value = "/product", method = RequestMethod.GET)
     public @ResponseBody List<Map<String,Object>> getProductById(@RequestParam(value = "name", defaultValue = "") String productName,

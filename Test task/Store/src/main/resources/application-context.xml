@@ -25,11 +25,11 @@ http://www.springframework.org/schema/context/spring-context.xsd">
           class="org.springframework.orm.hibernate4.HibernateTransactionManager"
           p:sessionFactory-ref="sessionFactory"/>
     <tx:annotation-driven/>
-    <context:component-scan base-package="com.apress.prospring4.ch7"/>
+    <context:component-scan base-package="com.task"/>
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
           p:dataSource-ref="dataSource"
-          p:packagesToScan="com.task.core"
+          p:packagesToScan="com.task.model,com.task.core"
           p:hibernateProperties-ref="hibernateProperties"/>
     <util:properties id="hibernateProperties">
         <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>

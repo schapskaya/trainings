@@ -8,9 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -21,13 +19,14 @@ import java.util.Map;
  *         Created on 13.01.2017.
  */
 @Component
-public class ProductDao {
-    private static final Logger log = LoggerFactory.getLogger(ProductDao.class);
+public class ProductDaoJdbc implements IProductDao {
+    private static final Logger log = LoggerFactory.getLogger(ProductDaoJdbc.class);
     ObjectMapper mapper = new ObjectMapper();
 
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Override
     public List<Product> getAllProducts() {
         mapper.setDateFormat(DateFormat.getDateInstance(DateFormat.LONG));
         //Query customer by id
@@ -43,6 +42,7 @@ public class ProductDao {
                 });
     }
 
+    @Override
     public List<Map<String, Object>> getPriceHistoryForProduct(String productName) {
         return jdbcTemplate.query("SELECT price, date FROM products where name=?", new Object[]{productName},
                 (rs, rowNum) -> new HashMap<String, Object>(){{

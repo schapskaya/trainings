@@ -1,6 +1,6 @@
 package com.task.rest;
 
-import com.task.core.ProductDao;
+import com.task.core.IProductDao;
 import com.task.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductResource {
     @Autowired
-    private ProductDao productDao;
+    private IProductDao productDao;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Product> getProductsList() {
