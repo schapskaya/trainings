@@ -9,7 +9,7 @@ import java.util.Map;
  * @author Svetlana Chapskaya
  *         Created on 16.01.2017.
  */
-public interface IProductDao {
+public interface ProductDao {
     List<Product> getAllProducts();
     List<Map<String, Object>> getPriceHistoryForProduct(String productName);
 }
